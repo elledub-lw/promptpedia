@@ -1,0 +1,53 @@
+---
+/*
+ * Button.astro
+ * ─────────────────────────────────────────────
+ * A reusable button component with multiple visual variants.
+ *
+ * Props:
+ *   href     — If provided, renders as an <a> tag (link styled as a button)
+ *   variant  — Visual style: "primary" | "secondary" | "outline"
+ *
+ * Usage:
+ *   <Button href="/contact" variant="primary">Get in touch</Button>
+ *   <Button variant="outline">Learn more</Button>
+ * ─────────────────────────────────────────────
+ */
+
+interface Props {
+  href?: string;
+  variant?: "primary" | "secondary" | "outline";
+}
+
+const { href, variant = "primary" } = Astro.props;
+
+// Build the CSS classes based on the variant.
+// Base styles are shared; variant styles change colors.
+const baseClasses =
+  "inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg transition-colors focus-visible:outline-2 focus-visible:outline-offset-2";
+
+const variantStyles: Record<string, string> = {
+  primary: "background-color: var(--color-primary); color: #ffffff;",
+  secondary:
+    "background-color: var(--color-bg-tertiary); color: var(--color-text);",
+  outline:
+    "background-color: transparent; color: var(--color-primary); border: 1px solid var(--color-primary);",
+};
+
+const style = variantStyles[variant] || variantStyles.primary;
+
+// If href is provided, render an <a> tag. Otherwise, render a <button>.
+const Tag = href ? "a" : "button";
+---
+
+{
+  Tag === "a" ? (
+    <a href={href} class={baseClasses} style={style}>
+      <slot />
+    </a>
+  ) : (
+    <button class={baseClasses} style={style}>
+      <slot />
+    </button>
+  )
+}

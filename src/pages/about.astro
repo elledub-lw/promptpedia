@@ -1,0 +1,71 @@
+---
+/*
+ * about.astro — About Page
+ * ─────────────────────────────────────────────
+ * A single-column prose layout explaining what Promptpedia is
+ * and who it's for. Replace the placeholder content with your own.
+ * ─────────────────────────────────────────────
+ */
+
+import Layout from "../components/Layout.astro";
+---
+
+<Layout
+  title="About | Promptpedia"
+  description="Learn about Promptpedia — a personal prompt management tool built with privacy and simplicity in mind."
+>
+  <section class="py-16 sm:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold mb-8" style="color: var(--color-text);">
+        About Promptpedia
+      </h1>
+
+      <!-- Placeholder image area -->
+      <div
+        class="w-full h-64 rounded-lg mb-8 flex items-center justify-center"
+        style="background-color: var(--color-bg-tertiary);"
+        role="img"
+        aria-label="Placeholder image"
+      >
+        <span class="text-sm" style="color: var(--color-text-tertiary);">
+          Image placeholder — replace with a real image
+        </span>
+      </div>
+
+      <div class="space-y-6">
+        <p
+          class="text-lg leading-relaxed"
+          style="color: var(--color-text-secondary);"
+        >
+          Promptpedia was born from a simple frustration: great AI prompts are
+          hard to keep track of. You craft the perfect prompt, get amazing
+          results, and then... you can't find it two weeks later. It's buried in
+          a chat history, lost in a notes app, or saved in a file you forgot
+          about.
+        </p>
+
+        <p
+          class="text-lg leading-relaxed"
+          style="color: var(--color-text-secondary);"
+        >
+          We built Promptpedia to solve this. It's a personal prompt library
+          with version control baked in. Every prompt you save has a full
+          history — you can see how it evolved, what changes improved results,
+          and revert to earlier versions when needed. Think of it as Git for
+          your AI prompts.
+        </p>
+
+        <p
+          class="text-lg leading-relaxed"
+          style="color: var(--color-text-secondary);"
+        >
+          Promptpedia is intentionally simple. It's a static site with no
+          server, no database, and no tracking. Your prompts live in your
+          repository, deployed to your infrastructure. You own everything. No
+          surprise dependencies, no data collection, no magic — just clean code
+          you can understand and control.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

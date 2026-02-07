@@ -1,0 +1,240 @@
+---
+/*
+ * Layout.astro
+ * ─────────────────────────────────────────────
+ * The main layout wrapper for every page. This component:
+ * 1. Sets up the <head> with all required meta/SEO tags
+ * 2. Renders the navigation bar (with mobile hamburger menu)
+ * 3. Renders the page content (passed as a slot)
+ * 4. Renders the footer
+ *
+ * Props:
+ *   title       — The page title (shown in browser tab)
+ *   description — Meta description for SEO
+ * ─────────────────────────────────────────────
+ */
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+// Used for canonical URL and OG tags
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+import ThemeToggle from "./ThemeToggle.astro";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- SEO: Every page needs these -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph tags for social sharing -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <!-- Placeholder OG image — replace with a real one when ready -->
+    <meta
+      property="og:image"
+      content={new URL("/og-placeholder.png", Astro.site)}
+    />
+
+    <!--
+      Theme initialization script.
+      This runs BEFORE the page renders to prevent a flash of wrong theme.
+      It checks localStorage first, then falls back to system preference.
+    -->
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        if (
+          stored === "dark" ||
+          (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+  </head>
+
+  <body
+    class="min-h-screen flex flex-col"
+    style="background-color: var(--color-bg); color: var(--color-text);"
+  >
+    <!-- ── Navigation ── -->
+    <header
+      class="sticky top-0 z-50 border-b"
+      style="background-color: var(--color-surface); border-color: var(--color-border);"
+    >
+      <nav
+        class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
+      >
+        <!-- Logo / Site name -->
+        <a
+          href="/"
+          class="text-xl font-bold"
+          style="color: var(--color-primary);"
+        >
+          Promptpedia
+        </a>
+
+        <!-- Desktop navigation links -->
+        <div class="hidden md:flex items-center gap-6">
+          <a
+            href="/"
+            class="text-sm font-medium hover:opacity-80 transition-opacity"
+            style="color: var(--color-text-secondary);"
+          >
+            Home
+          </a>
+          <a
+            href="/about"
+            class="text-sm font-medium hover:opacity-80 transition-opacity"
+            style="color: var(--color-text-secondary);"
+          >
+            About
+          </a>
+          <a
+            href="/contact"
+            class="text-sm font-medium hover:opacity-80 transition-opacity"
+            style="color: var(--color-text-secondary);"
+          >
+            Contact
+          </a>
+          <ThemeToggle />
+        </div>
+
+        <!-- Mobile: theme toggle + hamburger button -->
+        <div class="flex items-center gap-3 md:hidden">
+          <ThemeToggle />
+          <button
+            id="mobile-menu-btn"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            class="p-2 rounded-lg"
+            style="color: var(--color-text-secondary);"
+          >
+            <!-- Hamburger icon (lucide "menu" SVG) -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="4" x2="20" y1="12" y2="12"></line>
+              <line x1="4" x2="20" y1="6" y2="6"></line>
+              <line x1="4" x2="20" y1="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile navigation menu (hidden by default) -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden border-t px-4 py-4 space-y-3"
+        style="background-color: var(--color-surface); border-color: var(--color-border);"
+      >
+        <a
+          href="/"
+          class="block text-sm font-medium py-2"
+          style="color: var(--color-text-secondary);"
+        >
+          Home
+        </a>
+        <a
+          href="/about"
+          class="block text-sm font-medium py-2"
+          style="color: var(--color-text-secondary);"
+        >
+          About
+        </a>
+        <a
+          href="/contact"
+          class="block text-sm font-medium py-2"
+          style="color: var(--color-text-secondary);"
+        >
+          Contact
+        </a>
+      </div>
+    </header>
+
+    <!-- ── Main content (each page fills this slot) ── -->
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <!-- ── Footer ── -->
+    <footer
+      class="border-t py-8 mt-auto"
+      style="background-color: var(--color-bg-secondary); border-color: var(--color-border);"
+    >
+      <div
+        class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+      >
+        <p class="text-sm" style="color: var(--color-text-tertiary);">
+          &copy; {new Date().getFullYear()} Promptpedia. All rights reserved.
+        </p>
+        <div class="flex gap-6">
+          <a
+            href="/"
+            class="text-sm hover:opacity-80 transition-opacity"
+            style="color: var(--color-text-tertiary);"
+          >
+            Home
+          </a>
+          <a
+            href="/about"
+            class="text-sm hover:opacity-80 transition-opacity"
+            style="color: var(--color-text-tertiary);"
+          >
+            About
+          </a>
+          <a
+            href="/contact"
+            class="text-sm hover:opacity-80 transition-opacity"
+            style="color: var(--color-text-tertiary);"
+          >
+            Contact
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <!--
+      Mobile menu toggle script.
+      This is the only interactive JS on the page besides the theme toggle.
+    -->
+    <script is:inline>
+      (function () {
+        const btn = document.getElementById("mobile-menu-btn");
+        const menu = document.getElementById("mobile-menu");
+        if (btn && menu) {
+          btn.addEventListener("click", function () {
+            const isOpen = !menu.classList.contains("hidden");
+            menu.classList.toggle("hidden");
+            btn.setAttribute("aria-expanded", String(!isOpen));
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

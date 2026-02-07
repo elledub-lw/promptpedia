@@ -1,0 +1,25 @@
+---
+/*
+ * Card.astro
+ * ─────────────────────────────────────────────
+ * A simple container component with a background, padding, and rounded
+ * corners. Used for the feature grid on the homepage and anywhere you
+ * need an elevated surface.
+ *
+ * Props: none (content is passed via the default slot)
+ *
+ * Usage:
+ *   <Card>
+ *     <h3>Feature title</h3>
+ *     <p>Feature description</p>
+ *   </Card>
+ * ─────────────────────────────────────────────
+ */
+---
+
+<div
+  class="rounded-lg p-6 border transition-colors"
+  style="background-color: var(--color-surface); border-color: var(--color-border);"
+>
+  <slot />
+</div>

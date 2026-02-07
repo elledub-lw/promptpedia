@@ -1,0 +1,179 @@
+---
+/*
+ * index.astro — Homepage
+ * ─────────────────────────────────────────────
+ * The landing page for Promptpedia. Contains:
+ * 1. Hero section with headline and subtitle
+ * 2. 3-column feature grid explaining what the app does
+ * 3. Call-to-action section
+ * ─────────────────────────────────────────────
+ */
+
+import Layout from "../components/Layout.astro";
+import Button from "../components/Button.astro";
+import Card from "../components/Card.astro";
+---
+
+<Layout
+  title="Home | Promptpedia"
+  description="Your personal library for managing, versioning, and organizing the best AI prompts you use every day."
+>
+  <!-- ── Hero Section ── -->
+  <section class="py-20 sm:py-28">
+    <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1
+        class="text-4xl sm:text-5xl font-bold tracking-tight"
+        style="color: var(--color-text);"
+      >
+        Your AI Prompts,<br />
+        <span style="color: var(--color-primary);">Organized & Versioned</span>
+      </h1>
+      <p
+        class="mt-6 text-lg sm:text-xl max-w-2xl mx-auto"
+        style="color: var(--color-text-secondary);"
+      >
+        Promptpedia is your personal library for managing the best AI prompts
+        you use. Track changes, organize by category, and never lose a great
+        prompt again.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href="/contact" variant="primary">Get Started</Button>
+        <Button href="/about" variant="outline">Learn More</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Feature Grid ── -->
+  <section class="py-16" style="background-color: var(--color-bg-secondary);">
+    <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
+      <h2
+        class="text-2xl sm:text-3xl font-bold text-center mb-12"
+        style="color: var(--color-text);"
+      >
+        Everything you need to manage your prompts
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Feature 1: Organize -->
+        <Card>
+          <!-- Lucide "folder" icon -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mb-4"
+            style="color: var(--color-primary);"
+            aria-hidden="true"
+          >
+            <path
+              d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"
+            ></path>
+          </svg>
+          <h3
+            class="text-lg font-semibold mb-2"
+            style="color: var(--color-text);"
+          >
+            Organize
+          </h3>
+          <p class="text-sm" style="color: var(--color-text-secondary);">
+            Group your prompts by category, project, or AI model. Find the right
+            prompt instantly with tags and search.
+          </p>
+        </Card>
+
+        <!-- Feature 2: Version Control -->
+        <Card>
+          <!-- Lucide "git-branch" icon -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mb-4"
+            style="color: var(--color-primary);"
+            aria-hidden="true"
+          >
+            <line x1="6" x2="6" y1="3" y2="15"></line>
+            <circle cx="18" cy="6" r="3"></circle>
+            <circle cx="6" cy="18" r="3"></circle>
+            <path d="M18 9a9 9 0 0 1-9 9"></path>
+          </svg>
+          <h3
+            class="text-lg font-semibold mb-2"
+            style="color: var(--color-text);"
+          >
+            Version Control
+          </h3>
+          <p class="text-sm" style="color: var(--color-text-secondary);">
+            Track every change to your prompts. See what worked, revert to
+            previous versions, and iterate with confidence.
+          </p>
+        </Card>
+
+        <!-- Feature 3: Private & Local -->
+        <Card>
+          <!-- Lucide "shield" icon -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mb-4"
+            style="color: var(--color-primary);"
+            aria-hidden="true"
+          >
+            <path
+              d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+            ></path>
+          </svg>
+          <h3
+            class="text-lg font-semibold mb-2"
+            style="color: var(--color-text);"
+          >
+            Private & Local
+          </h3>
+          <p class="text-sm" style="color: var(--color-text-secondary);">
+            Your prompts stay yours. No tracking, no data collection, no
+            third-party services. Everything lives in your repository.
+          </p>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Call to Action ── -->
+  <section class="py-20">
+    <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2
+        class="text-2xl sm:text-3xl font-bold mb-4"
+        style="color: var(--color-text);"
+      >
+        Ready to organize your prompts?
+      </h2>
+      <p
+        class="text-lg mb-8 max-w-xl mx-auto"
+        style="color: var(--color-text-secondary);"
+      >
+        Get in touch to learn more or start building your personal prompt
+        library today.
+      </p>
+      <Button href="/contact" variant="primary">Contact Us</Button>
+    </div>
+  </section>
+</Layout>

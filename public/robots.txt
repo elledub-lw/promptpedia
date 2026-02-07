@@ -1,0 +1,8 @@
+# robots.txt
+# Allow all search engines to crawl everything.
+# The sitemap is generated automatically by Astro.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://elledub-lw.github.io/promptpedia/sitemap-index.xml
