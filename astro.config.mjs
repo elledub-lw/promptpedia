@@ -13,7 +13,8 @@ export default defineConfig({
   // 'static' means Astro builds plain HTML files — no server needed.
   output: "static",
 
-  site: "https://elledub-lw.github.io/promptpedia",
+  site: "https://elledub-lw.github.io",
+  base: "/promptpedia",
 
   integrations: [
     // Tailwind handles CSS at build time — zero runtime cost.

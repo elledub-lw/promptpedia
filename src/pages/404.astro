@@ -9,6 +9,8 @@
 
 import Layout from "../components/Layout.astro";
 import Button from "../components/Button.astro";
+
+const homeHref = import.meta.env.BASE_URL.replace(/\/$/, "") + "/";
 ---
 
 <Layout
@@ -33,7 +35,7 @@ import Button from "../components/Button.astro";
         The page you're looking for doesn't exist or has been moved. Let's get
         you back on track.
       </p>
-      <Button href="/" variant="primary">Back to Homepage</Button>
+      <Button href={homeHref} variant="primary">Back to Homepage</Button>
     </div>
   </section>
 </Layout>

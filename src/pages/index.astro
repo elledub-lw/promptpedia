@@ -12,6 +12,10 @@
 import Layout from "../components/Layout.astro";
 import Button from "../components/Button.astro";
 import Card from "../components/Card.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const contactHref = base + "/contact";
+const aboutHref = base + "/about";
 ---
 
 <Layout
@@ -37,8 +41,8 @@ import Card from "../components/Card.astro";
         prompt again.
       </p>
       <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-        <Button href="/contact" variant="primary">Get Started</Button>
-        <Button href="/about" variant="outline">Learn More</Button>
+        <Button href={contactHref} variant="primary">Get Started</Button>
+        <Button href={aboutHref} variant="outline">Learn More</Button>
       </div>
     </div>
   </section>
@@ -173,7 +177,7 @@ import Card from "../components/Card.astro";
         Get in touch to learn more or start building your personal prompt
         library today.
       </p>
-      <Button href="/contact" variant="primary">Contact Us</Button>
+      <Button href={contactHref} variant="primary">Contact Us</Button>
     </div>
   </section>
 </Layout>

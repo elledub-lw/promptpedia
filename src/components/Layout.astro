@@ -26,6 +26,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 import ThemeToggle from "./ThemeToggle.astro";
 import "../styles/global.css";
+
+// Resolve internal links with the base path (e.g. "/promptpedia")
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const links = {
+  home: base + "/",
+  about: base + "/about",
+  contact: base + "/contact",
+  favicon: base + "/favicon.ico",
+};
 ---
 
 <!doctype html>
@@ -33,7 +42,7 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href={links.favicon} />
 
     <!-- SEO: Every page needs these -->
     <title>{title}</title>
@@ -83,7 +92,7 @@ import "../styles/global.css";
       >
         <!-- Logo / Site name -->
         <a
-          href="/"
+          href={links.home}
           class="text-xl font-bold"
           style="color: var(--color-primary);"
         >
@@ -93,21 +102,21 @@ import "../styles/global.css";
         <!-- Desktop navigation links -->
         <div class="hidden md:flex items-center gap-6">
           <a
-            href="/"
+            href={links.home}
             class="text-sm font-medium hover:opacity-80 transition-opacity"
             style="color: var(--color-text-secondary);"
           >
             Home
           </a>
           <a
-            href="/about"
+            href={links.about}
             class="text-sm font-medium hover:opacity-80 transition-opacity"
             style="color: var(--color-text-secondary);"
           >
             About
           </a>
           <a
-            href="/contact"
+            href={links.contact}
             class="text-sm font-medium hover:opacity-80 transition-opacity"
             style="color: var(--color-text-secondary);"
           >
@@ -154,21 +163,21 @@ import "../styles/global.css";
         style="background-color: var(--color-surface); border-color: var(--color-border);"
       >
         <a
-          href="/"
+          href={links.home}
           class="block text-sm font-medium py-2"
           style="color: var(--color-text-secondary);"
         >
           Home
         </a>
         <a
-          href="/about"
+          href={links.about}
           class="block text-sm font-medium py-2"
           style="color: var(--color-text-secondary);"
         >
           About
         </a>
         <a
-          href="/contact"
+          href={links.contact}
           class="block text-sm font-medium py-2"
           style="color: var(--color-text-secondary);"
         >
@@ -195,21 +204,21 @@ import "../styles/global.css";
         </p>
         <div class="flex gap-6">
           <a
-            href="/"
+            href={links.home}
             class="text-sm hover:opacity-80 transition-opacity"
             style="color: var(--color-text-tertiary);"
           >
             Home
           </a>
           <a
-            href="/about"
+            href={links.about}
             class="text-sm hover:opacity-80 transition-opacity"
             style="color: var(--color-text-tertiary);"
           >
             About
           </a>
           <a
-            href="/contact"
+            href={links.contact}
             class="text-sm hover:opacity-80 transition-opacity"
             style="color: var(--color-text-tertiary);"
           >
